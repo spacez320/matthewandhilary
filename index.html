@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
+    <link rel="stylesheet" href="sakura.css" type="text/css">
     <style type="text/css">
       body {
         font-family: "Roboto Condensed", serif;
@@ -39,12 +39,34 @@
         margin-bottom: 1rem;
       }
 
+      p.collapsable {
+        margin: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.2s ease-out;
+      }
+
+      p.collapsable:hover {
+        margin-bottom: 1rem;
+        max-height: 9999px;
+      }
+
+      p:hover + p.collapsable {
+        margin-bottom: 1rem;
+        max-height: 9999px;
+      }
+
+      span.nav {
+        color: #144f5a;
+        font-size: 0.75em;
+      }
+
       div#details {
         border-left: black solid 1px;
         margin: auto;
         padding-left: 20px;
         text-align: left;
-        width: 90%;
+        width: 95%;
       }
 
       .bold {
@@ -53,17 +75,24 @@
     </style>
   </head>
   <body>
-    <h1>Matthew and Hilary's Wedding</h1>
+    <h1>Matthew and Hilary are getting married!</h1>
     <h3>October 25th, 2025 • in Stowe, Vermont</h3>
     <img src="matthewandhilary.jpg" />
     <div id="details">
       <p><span class="bold">When?</span> • October 25th, 2025</p>
-      <p><span class="bold">Where?</span> • Trapp Family Lodge, 700 Trapp Hill Rd, Stowe, VT</p>
-      <p><span class="bold">Event info?</span> • Details coming soon.</p>
-      <p><span class="bold">Travel?</span> • Details coming soon.</p>
+      <p><span class="bold">Where?</span> • <a href="https://www.vontrappresort.com">Trapp Family Lodge</a>, <a href="https://maps.app.goo.gl/wpjX1iqSqvFVr4cR7">700 Trapp Hill Rd, Stowe, VT</a></p>
+      <p><span class="bold">Event info?</span> • Ceremony is 3:00pm ET, Reception at 3:30pm ET.</p>
+      <p><span class="bold">Lodging?</span> • The lodge is available for reservations, and there are area hotels. <span class="nav">(More Info ⬇️)</span></p>
+      <p class="collapsable">
+Guest rooms may be reserved online at <a href="https://trappfamily.com">www.trappfamily.com</a>,
+calling them at 1-800-826-7000 ext: 1, <a href="mailto:reservations@trappfamily.com">or by emailing
+them</a>. Check in is 4:00pm and check-out is 11:00am. <a
+href="https://maps.app.goo.gl/SYcxogECkRc9pASb9">There are also lots of other hotels in the
+area.</a>
+      </p>
       <p><span class="bold">Things to do?</span> • Details coming soon.</p>
       <p><span class="bold">RSVP?</span> • Details coming soon.</p>
-      <p><span class="bold">Questions?</span> • Details coming soon.</p>
+      <p><span class="bold">Questions?</span> • <a href="mailto:matthew.e.coleman+wedding@gmail.com">You can email Matthew!</a></p>
     </div>
 
     <footer>

@@ -43,18 +43,47 @@ spec:
     app: matthewandhilary
 ---
 apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: matthewandhilary-https-redirect
+spec:
+  redirectScheme:
+    scheme: https
+---
+apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   labels:
     app: matthewandhilary
-  name: matthewandhilary
+  name: matthewandhilary-http
   namespace: matthewandhilary
 spec:
   entryPoints:
     - web
   routes:
     - match: Host(`matthewandhilary.info`)
+      middlewares:
+        - name: matthewandhilary-https-redirect
       kind: Rule
       services:
         - name: matthewandhilary
           port: 80
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  labels:
+    app: matthewandhilary
+  name: matthewandhilary-https
+  namespace: matthewandhilary
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`matthewandhilary.info`)
+      kind: Rule
+      services:
+        - name: matthewandhilary
+          port: 80
+  tls:
+    secretName: matthewandhilary.info-tls
