@@ -52,6 +52,28 @@ spec:
     scheme: https
 ---
 apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: matthewandhilary-rsvp-redirect
+  namespace: matthewandhilary
+spec:
+  redirectRegex:
+    permanent: true
+    regex: "(?i)^https?://(www\\.)?matthewandhilary\\.info/rsvp"
+    replacement: "https://forms.gle/de8VeSZ7qiEoQiZB8"
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: matthewandhilary-banquet-rsvp-redirect
+  namespace: matthewandhilary
+spec:
+  redirectRegex:
+    permanent: true
+    regex: "(?i)^https?://(www\\.)?matthewandhilary\\.info/nov8dinner-rsvp"
+    replacement: "https://forms.gle/8sMQxQbv1Jvqy1KU7"
+---
+apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   labels:
@@ -65,6 +87,8 @@ spec:
     - match: Host(`matthewandhilary.info`)
       middlewares:
         - name: matthewandhilary-https-redirect
+        - name: matthewandhilary-rsvp-redirect
+        - name: matthewandhilary-banquet-rsvp-redirect
       kind: Rule
       services:
         - name: matthewandhilary
@@ -83,6 +107,9 @@ spec:
   routes:
     - match: Host(`matthewandhilary.info`)
       kind: Rule
+      middlewares:
+        - name: matthewandhilary-rsvp-redirect
+        - name: matthewandhilary-banquet-rsvp-redirect
       services:
         - name: matthewandhilary
           port: 80
