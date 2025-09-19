@@ -63,7 +63,12 @@
         font-size: 0.75em;
       }
 
-      div#details {
+      ul {
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      div#details, div#schedule {
         border-left: black solid 1px;
         margin: auto;
         padding-left: 20px;
@@ -71,8 +76,22 @@
         width: 95%;
       }
 
+      div#schedule {
+        margin-top: 2rem;
+      }
+
       .bold {
         font-weight: bold;
+      }
+
+      /* Auto-expand collapibles on mobile */
+      @media (max-width: 768px) {
+        p.collapsible {
+          margin-bottom: 1rem;
+          max-height: none;
+          overflow: visible;
+          padding: initial;
+        }
       }
     </style>
   </head>
@@ -85,8 +104,10 @@
       <p><span class="bold">Where?</span> • <a href="https://www.vontrappresort.com">Trapp Family Lodge</a>, <a href="https://maps.app.goo.gl/wpjX1iqSqvFVr4cR7">700 Trapp Hill Rd, Stowe, VT</a></p>
       <p><span class="bold">Event info?</span> • Ceremony is 3:00pm ET, Reception at 3:30pm ET. <span class="nav">(More Info ⬇️)</span></p>
       <p class="collapsible">
-Dress code is on the dressy side of casual (don't sweat it). The weather will probably be chilly and
-the ceremony will be outside, weather permitting, so bring something for the breeze!
+Dress code is on the dressy side of casual (don't sweat it). The weather will
+probably be chilly and the ceremony will be outside, weather permitting, so
+bring something for the breeze! Below is the official schedule (subject to
+change with more details):
       </p>
       <p><span class="bold">Lodging?</span> • The lodge is available for reservations, and there are area hotels. <span class="nav">(More Info ⬇️)</span></p>
       <p class="collapsible">
@@ -108,6 +129,25 @@ to some local charities we support: <a href="https://www.gbfb.org/">The Greater 
       <p><span class="bold">Things to do?</span> • Details coming soon.</p>
       <p><span class="bold">RSVP?</span> • You should receive one in the mail soon. To respond, <a href="https://forms.gle/de8VeSZ7qiEoQiZB8">click here!</a></p>
       <p><span class="bold">Questions?</span> • <a href="mailto:matthew.e.coleman+wedding@gmail.com">You can email Matthew!</a></p>
+    </div>
+
+    <div id="schedule">
+      <p><span class="bold">Full Schedule</span></p>
+<ul>
+	<li>12:00 Rain Call</li>
+	<li>2:30 Transportation to Ceremony Begins</li>
+	<li>3:00-3:30 Ceremony</li>
+	<li>3:30-4:45 Cocktail Hour</li>
+	<li>4:45-5:00 Guests to Reception</li>
+	<li>5:00-5:30 Intros, First Dance, Toasts</li>
+	<li>5:30 Salads Served</li>
+	<li>5:45 Vendor Salads & Entrees Served</li>
+	<li>6:00 Entrees Served</li>
+	<li>6:45 Cake Cutting</li>
+	<li>7:00 Parent Dances & More Dancing</li>
+	<li>8:30 Last Call at Bar & Last Song</li>
+	<li>9:00 Event Concludes</li>
+</ul>
     </div>
 
     <footer>
