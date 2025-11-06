@@ -12,4 +12,6 @@ jobs:
         run: |
           docker login --password $DOCKER_HUB_TOKEN --username $DOCKER_HUB_USERNAME
           docker build --tag spacez320/matthewandhilary:latest .
+          docker build --file Dockerfile.backend --tag spacez320/matthewandhilary-backend:latest .
           docker push spacez320/matthewandhilary:latest
+          docker push spacez320/matthewandhilary-backend:latest
