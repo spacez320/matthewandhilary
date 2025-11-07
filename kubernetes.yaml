@@ -36,7 +36,7 @@ spec:
             - mountPath: /app/media
               name: media
       nodeSelector:
-        kubernetes.io/hostname: lke57754-266764-3e4f58660000
+        kubernetes.io/hostname: lke57754-266764-3e4f58660000 # To preserve host volume access
       volumes:
         - name: media
           hostPath:
@@ -126,18 +126,11 @@ spec:
   entryPoints:
     - websecure
   routes:
-    # - match: Host(`matthewandhilary.info`) && PathPrefix(`/backend`)
-    #   kind: Rule
-    #   priority: 1
-    #   services:
-    #     - name: matthewandhilary
-    #       port: 8080
     - match: Host(`matthewandhilary.info`)
       kind: Rule
       middlewares:
         - name: matthewandhilary-rsvp-redirect
         - name: matthewandhilary-banquet-rsvp-redirect
-      priority: 2
       services:
         - name: matthewandhilary
           port: 80

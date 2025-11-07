@@ -6,11 +6,6 @@
 
     <title>Matthew and Hilary's Wedding Pictures</title>
 
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
-    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" href="sakura.css" type="text/css"> -->
-
     <link rel="stylesheet" href="node_modules/reveal.js/dist/reset.css">
     <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
     <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/black.css">
@@ -22,7 +17,6 @@
   <body>
     <div class="reveal">
       <div class="slides" id="slides">
-        <!-- Slides will go hear -->
       </div>
     </div>
 
@@ -33,7 +27,7 @@
     <script src="node_modules/reveal.js/plugin/highlight/highlight.js"></script>
     <script>
       // Retrieve a list of media files
-      fetch('https://matthewandhilary.info/backend')
+      fetch('/backend')
         .then((res) => {
           return res.text()
         })
@@ -47,7 +41,7 @@
           Reveal.initialize({
             hash: true,
             autoPlayMedia: true,
-            autoSlide: 3000,
+            autoSlide: 4000,
             controls: false,
             loop: true,
           });
