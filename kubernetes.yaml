@@ -32,7 +32,6 @@ spec:
           volumeMounts:
             - mountPath: /app/media
               name: media
-              readOnly: true
       nodeSelector:
         kubernetes.io/hostname: lke57754-266764-3e4f58660000
       volumes:
