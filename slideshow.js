@@ -2,6 +2,8 @@ var http = require('node:http');
 var fs = require('node:fs');
 
 const server = http.createServer((req, res) => {
+  console.log("Request");
+
   // Retrieve slideshow images
   let images = fs.readdirSync('media/images');
 
@@ -21,6 +23,8 @@ const server = http.createServer((req, res) => {
   headers['Content-Type'] = 'text/json';
   res.writeHead(200, headers);
   res.end(JSON.stringify(images));
+
+  console.log("Response");
 })
 
 server.listen(8081, '0.0.0.0', () => {});
