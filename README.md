@@ -13,8 +13,6 @@ podman run -v $(pwd):/app/:Z --name backend --publish 8081:8081 --replace --netw
 Deploying:
 
 ```
-podman build . -t spacez320/matthewandhilary:latest
-podman push spacez320/matthewandhilary:latest
-kubectl delete pods --all --namespace matthewandhilary
 kubectl apply -f kubernetes.yaml
+kubectl delete pods --all --namespace matthewandhilary
 ```
