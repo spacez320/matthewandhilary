@@ -21,10 +21,27 @@ spec:
         app: matthewandhilary
     spec:
       containers:
-        - name: nginx
+        - name: frontend
           image: spacez320/matthewandhilary:latest
           ports:
             - containerPort: 80
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html/media
+              name: media
+        - name: backend
+          image: spacez320/matthewandhilary-backend:latest
+          ports:
+            - containerPort: 8081
+          volumeMounts:
+            - mountPath: /app/media
+              name: media
+      nodeSelector:
+        kubernetes.io/hostname: lke57754-266764-3e4f58660000 # To preserve host volume access
+      volumes:
+        - name: media
+          hostPath:
+            path: /srv
+            type: Directory
 ---
 apiVersion: v1
 kind: Service
@@ -35,10 +52,14 @@ metadata:
   namespace: matthewandhilary
 spec:
   ports:
-    - name: web
+    - name: frontend
       port: 80
       protocol: TCP
       targetPort: 80
+    - name: backend
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
   selector:
     app: matthewandhilary
 ---

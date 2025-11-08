@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Matthew and Hilary's Wedding Pictures</title>
+
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/black.css">
+
+    <style type="text/css">
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides" id="slides">
+      </div>
+    </div>
+
+    <script src="jquery-3.7.1.slim.min.js"></script>
+    <script src="node_modules/reveal.js/dist/reveal.js"></script>
+    <script src="node_modules/reveal.js/plugin/notes/notes.js"></script>
+    <script src="node_modules/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+    <script>
+      // Retrieve a list of media files
+      fetch('/backend')
+        .then((res) => {
+          return res.text()
+        })
+        .then((text) => {
+          let images = JSON.parse(text);
+          images.forEach((image, i) => {
+            $('#slides').append(`<section><img src="media/images/${image}" /></section>`);
+          });
+
+          // Start the slideshow
+          Reveal.initialize({
+            hash: true,
+            autoPlayMedia: true,
+            autoSlide: 4000,
+            controls: false,
+            loop: true,
+          });
+        });
+    </script>
+  </body>
+</html>
