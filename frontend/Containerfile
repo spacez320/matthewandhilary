@@ -1,0 +1,14 @@
+FROM nginx:latest
+WORKDIR /usr/share/nginx/html
+
+# Copy site assets
+COPY media media
+COPY node_modules node_modules
+COPY vendor vendor
+
+# Copy site pages
+COPY index.html /usr/share/nginx/html/index.html
+COPY slideshow.html /usr/share/nginx/html/slideshow.html
+
+# Copy Nginx configuration
+COPY deploy/nginx.conf /etc/nginx/conf.d/default.conf
