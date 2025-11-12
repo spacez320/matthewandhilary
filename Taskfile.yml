@@ -1,0 +1,20 @@
+version: "3"
+
+tasks:
+  default:
+    cmds:
+      - task: dev:up
+
+  dev:down:
+    cmds:
+      - podman kube down deploy/kubernetes.development.yaml
+
+  dev:up:
+    cmds:
+      - podman kube play deploy/kubernetes.development.yaml
+          --build
+          --network pasta:-t,auto,-u,auto,-T,auto,-U,auto
+          --replace
+    sources:
+      - "backend/*.js"
+    watch: true

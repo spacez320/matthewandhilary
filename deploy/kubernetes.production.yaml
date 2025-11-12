@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -24,7 +25,7 @@ spec:
         - name: frontend
           image: spacez320/matthewandhilary:latest
           ports:
-            - containerPort: 80
+            - containerPort: 8080
           volumeMounts:
             - mountPath: /usr/share/nginx/html/media
               name: media
@@ -53,9 +54,9 @@ metadata:
 spec:
   ports:
     - name: frontend
-      port: 80
+      port: 8080
       protocol: TCP
-      targetPort: 80
+      targetPort: 8080
     - name: backend
       port: 8080
       protocol: TCP
@@ -113,7 +114,7 @@ spec:
       kind: Rule
       services:
         - name: matthewandhilary
-          port: 80
+          port: 8080
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
@@ -133,6 +134,6 @@ spec:
         - name: matthewandhilary-banquet-rsvp-redirect
       services:
         - name: matthewandhilary
-          port: 80
+          port: 8080
   tls:
     secretName: matthewandhilary.info-tls

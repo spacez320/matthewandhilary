@@ -1,0 +1,64 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media
+spec:
+  accessModes:
+    - ReadOnlyMany
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: matthewandhilary
+  name: matthewandhilary
+  namespace: matthewandhilary
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: matthewandhilary
+  template:
+    metadata:
+      labels:
+        app: matthewandhilary
+    spec:
+      containers:
+        - name: frontend
+          image: frontend
+          ports:
+            - containerPort: 8080
+          securityContext:
+            seLinuxOptions:
+              type: spc_t
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html
+              name: frontend
+            - mountPath: /usr/share/nginx/html/media
+              name: media
+        - name: backend
+          args: ["node", "/app/slideshow.js"]
+          image: backend
+          ports:
+            - containerPort: 8081
+          securityContext:
+            seLinuxOptions:
+              type: spc_t
+          volumeMounts:
+            - mountPath: /app
+              name: backend
+            - mountPath: /app/media
+              name: media
+      volumes:
+        - name: backend
+          hostPath:
+            path: ./backend
+            type: Directory
+        - name: frontend
+          hostPath:
+            path: ./frontend
+            type: Directory
+        - name: media
+          persistentVolumeClaim:
+            claimName: media
