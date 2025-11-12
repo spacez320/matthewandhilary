@@ -15,11 +15,11 @@ const server = http.createServer((req, res) => {
 
   // Allow cross-origin for local development
   //
-  // TODO This defeats the purpose, undo this or make it conditional on local development
   const headers = {
-    'Access-Control-Allow-Methods': 'OPTIONS, POST, GET',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Max-Age': 2592000, // 30 days
+    // This defeats the purpose, but isn't relevant any more as requests are never cross-origin
+    // 'Access-Control-Allow-Methods': 'OPTIONS, POST, GET',
+    // 'Access-Control-Allow-Origin': '*',
+    // 'Access-Control-Max-Age': 2592000, // 30 days
   };
 
   // Cross-origin requests

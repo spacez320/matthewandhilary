@@ -2,7 +2,7 @@ FROM nginx:latest
 WORKDIR /usr/share/nginx/html
 
 # Copy site assets
-COPY media media
+COPY images images
 COPY node_modules node_modules
 COPY vendor vendor
 
