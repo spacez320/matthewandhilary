@@ -1,17 +1,32 @@
 name: Docker
 on: [push]
 jobs:
-  build:
+  build-backend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Build Docker image
         env:
-          DOCKER_HUB_USERNAME: spacez320
           DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+          DOCKER_HUB_USERNAME: spacez320
         run: |
           docker login --password $DOCKER_HUB_TOKEN --username $DOCKER_HUB_USERNAME
-          docker build --tag spacez320/matthewandhilary:latest .
-          docker build --file Dockerfile.backend --tag spacez320/matthewandhilary-backend:latest .
-          docker push spacez320/matthewandhilary:latest
+          docker build backend \
+            --file backend/Containerfile \
+            --tag spacez320/matthewandhilary-backend:latest
           docker push spacez320/matthewandhilary-backend:latest
+
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Docker image
+        env:
+          DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+          DOCKER_HUB_USERNAME: spacez320
+        run: |
+          docker login --password $DOCKER_HUB_TOKEN --username $DOCKER_HUB_USERNAME
+          docker build frontend \
+            --file frontend/Containerfile \
+            --tag spacez320/matthewandhilary:latest
+          docker push spacez320/matthewandhilary:latest
