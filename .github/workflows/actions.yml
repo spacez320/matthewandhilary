@@ -30,3 +30,16 @@ jobs:
             --file frontend/Containerfile \
             --tag spacez320/matthewandhilary:latest
           docker push spacez320/matthewandhilary:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build-backend, build-frontend]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy
+        env:
+          KUBECONFIG_CONTENTS: ${{ secrets.KUBECONFIG }}
+        run: |
+          mkdir .kube
+          echo "${KUBECONFIG_CONTENTS}" > .kube/config
+          kubectl --kubeconfig=.kube/config apply -f deploy/kubernetes.production.yaml
