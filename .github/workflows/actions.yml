@@ -16,6 +16,21 @@ jobs:
             --tag spacez320/matthewandhilary-backend:latest
           docker push spacez320/matthewandhilary-backend:latest
 
+  build-backend-init:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Docker image
+        env:
+          DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+          DOCKER_HUB_USERNAME: spacez320
+        run: |
+          docker login --password $DOCKER_HUB_TOKEN --username $DOCKER_HUB_USERNAME
+          docker build backend-init \
+            --file backend-init/Containerfile \
+            --tag spacez320/matthewandhilary-backend-init:latest
+          docker push spacez320/matthewandhilary-backend-init:latest
+
   build-frontend:
     runs-on: ubuntu-latest
     steps:
@@ -33,7 +48,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: [build-backend, build-frontend]
+    needs: [build-backend, build-backend-init, build-frontend]
     steps:
       - uses: actions/checkout@v3
       - name: Deploy
