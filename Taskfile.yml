@@ -1,17 +1,31 @@
 version: "3"
 
+dotenv:
+  - .env
+
 tasks:
   default:
     cmds:
       - task: dev:up
 
+  # Brings down a dev environment
   dev:down:
     cmds:
       - podman kube down deploy/kubernetes.development.yaml
 
+  # Executes the backend-init process
+  dev:backend-init:
+    cmds:
+      - uv run python main.py
+    dir: backend-init
+    env:
+      IMAGES_DIR: /tmp
+
+  # Brings up a dev environment
   dev:up:
     cmds:
       - podman kube play deploy/kubernetes.development.yaml
           --build
+          --configmap deploy/configmap.development.yaml
           --network pasta:-t,auto,-u,auto,-T,auto,-U,auto
           --replace
