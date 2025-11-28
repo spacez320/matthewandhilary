@@ -58,3 +58,4 @@ jobs:
           mkdir .kube
           echo "${KUBECONFIG_CONTENTS}" > .kube/config
           kubectl --kubeconfig=.kube/config apply -f deploy/kubernetes.production.yaml
+          kubectl --kubeconfig=.kube/config rollout restart deployment/matthewandhilary --namespace matthewandhilary
