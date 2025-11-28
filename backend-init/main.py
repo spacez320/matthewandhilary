@@ -1,5 +1,7 @@
 import io
 import os
+import random
+import time
 
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
@@ -29,7 +31,7 @@ def main():
         nextFileDone = False
         nextReq = drive.get_media(fileId=file["id"])
 
-        print(f"Downloading {file['name']} ...")
+        print(f"Downloading {file['name']}")
 
         download = MediaIoBaseDownload(nextFileContents, nextReq)
         while not nextFileDone:
@@ -37,6 +39,10 @@ def main():
 
         with open(f"{IMAGES_DIR}/{file['name']}", "wb") as f:
             f.write(nextFileContents.getvalue())
+
+        nextWait = random.randint(1, 10)
+        print(f"Waiting for {nextWait}")
+        time.sleep(nextWait)
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-name: Docker
+name: deploy
 on: [push]
 jobs:
   build-backend:
