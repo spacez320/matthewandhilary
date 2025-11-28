@@ -40,7 +40,8 @@ def main():
         with open(f"{IMAGES_DIR}/{file['name']}", "wb") as f:
             f.write(nextFileContents.getvalue())
 
-        nextWait = random.randint(1, 10)
+        # nextWait = random.randint(1, 10)
+        nextWait = 60
         print(f"Waiting for {nextWait}")
         time.sleep(nextWait)
 
