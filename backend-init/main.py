@@ -16,13 +16,12 @@ def main():
     os.makedirs(IMAGES_DIR, exist_ok=True)
 
     # Retrieve a list of files in the shared drive
-    files = (
-        drive.list(
-            q=f"'{GOOGLE_DRIVE_ID}' in parents",
-        )
-        .execute()
-        .get("files", [])
-    )
+    files = []
+    next_req = drive.list(q=f"'{GOOGLE_DRIVE_ID}' in parents")
+    while next_req is not None:
+        next_res = next_req.execute()
+        files += next_res.get("files", [])
+        next_req = drive.list_next(next_req, next_res)
 
     # Download all files
     for file in files:
