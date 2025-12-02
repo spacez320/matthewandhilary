@@ -24,6 +24,16 @@ spec:
       labels:
         app: matthewandhilary
     spec:
+      initContainers:
+        - name: backend-init
+          image: backend-init
+          envFrom:
+            - configMapRef:
+                name: matthewandhilary
+                optional: false
+          volumeMounts:
+            - mountPath: /app/media
+              name: media
       containers:
         - name: frontend
           image: frontend

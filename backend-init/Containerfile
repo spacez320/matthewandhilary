@@ -1,0 +1,7 @@
+FROM python
+WORKDIR /app
+COPY . .
+RUN \
+  pip install uv && \
+  uv sync
+ENTRYPOINT ["uv", "run", "python", "main.py"]
